@@ -7,3 +7,6 @@ api/__pycache__/
 api/.venv/
 api/*.pyc
 *.env
+
+# Python build artifacts
+api/first_principles_api.egg-info/
