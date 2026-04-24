@@ -1,0 +1,9 @@
+# Rust
+math_and_physics/target/
+math_and_physics/Cargo.lock
+
+# Python
+api/__pycache__/
+api/.venv/
+api/*.pyc
+*.env
