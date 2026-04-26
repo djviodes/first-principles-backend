@@ -1,14 +1,10 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+use pyo3::prelude::*;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod freefall;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[pymodule]
+fn math_and_physics(m: &Bound<'_, PyModule>) -> PyResult<()> {
+    m.add_class::<freefall::FreeFallResult>()?;
+    m.add_function(wrap_pyfunction!(freefall::compute_freefall, m)?)?;
+    Ok(())
 }
