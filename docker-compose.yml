@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=first_principles
+      - POSTGRES_PASSWORD=first_principles_password
+      - POSTGRES_DB=first_principles
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  api:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://first_principles:first_principles_password@postgres:5432/first_principles
+      - LOG_LEVEL=DEBUG
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
