@@ -131,7 +131,7 @@ cargo test
 
 Basic usage:
 ```bash
-curl http://localhost:8000/api/v1/generate-problem
+curl http://localhost:8000/api/v1/drop-time/generate-problem
 ```
 
 - Here you will need to grab the `problem_id` you received from the curl request to be used in the next curl request
@@ -140,7 +140,7 @@ curl http://localhost:8000/api/v1/generate-problem
 curl -X POST \
   -H "Content-Type: application/json" \
   -d '{"problem_id": "<<problem_id>>", "student_drop_time": "<<Float>>"}' \
-  http://localhost:8000/api/v1/submit-attempt
+  http://localhost:8000/api/v1/drop-time/submit-attempt
 ```
 
 - `student_drop_time` is the float value that the user will be passing in to see if they did their calculation correctly. For testing purposes, put anything around 5.0

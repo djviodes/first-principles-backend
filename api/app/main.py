@@ -7,4 +7,4 @@ app = FastAPI()
 register_error_handlers(app=app)
 
 
-app.include_router(drop_time_router, prefix="/api/v1", tags=["Drop_Time"])
+app.include_router(drop_time_router, prefix="/api/v1/drop-time", tags=["Drop_Time"])
