@@ -53,6 +53,11 @@ jobs:
           cd math_and_physics
           maturin develop
 
+      - name: Verify math_and_physics installed
+        run: |
+          source api/.venv/bin/activate
+          python -c "import math_and_physics; print('success')"
+
       - name: Run migration
         run: |
           cd api
