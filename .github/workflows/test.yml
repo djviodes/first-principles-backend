@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://first_principles:first_principles_password@localhost:5432/first_principles
+      VIRTUAL_ENV: ${{ github.workspace }}/api/.venv
     services:
       postgres:
         image: postgres:15
