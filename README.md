@@ -1,5 +1,7 @@
 # First-Principles
 
+[![Run Tests](https://github.com/djviodes/first-principles-backend/actions/workflows/test.yml/badge.svg)](https://github.com/djviodes/first-principles-backend/actions/workflows/test.yml)
+
 A physics study tool that aims to assist students and physics enthusiasts alike gain a better intuitive grasp on the inner workings of the equations they are learning.
 
 ---
