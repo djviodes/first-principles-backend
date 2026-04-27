@@ -24,7 +24,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
 
       - name: Install Rust
         run: |
@@ -32,7 +32,7 @@ jobs:
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Set up Python
-        uses: actions/setup-python@v5.4.0
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
