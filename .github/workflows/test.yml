@@ -60,11 +60,13 @@ jobs:
 
       - name: Run migration
         run: |
+          source api/.venv/bin/activate
           cd api
           alembic upgrade head
 
       - name: Run Python tests
         run: |
+          source api/.venv/bin/activate
           cd api
           pytest
 
