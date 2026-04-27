@@ -67,8 +67,7 @@ jobs:
       - name: Run Python tests
         run: |
           source api/.venv/bin/activate
-          cd api
-          pytest
+          python -m pytest api/tests
 
       - name: Run Rust tests
         run: |
