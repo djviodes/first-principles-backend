@@ -12,13 +12,12 @@ pub struct DropTimeResult {
     pub walker_positions: Vec<f64>,
 }
 
-#[pyfunction]
-pub fn compute_drop_time(
+fn compute_drop_time_logic(
     input_drop_time: f64,
     height: f64,
     walker_start: f64,
     walker_velocity: f64,
-) -> PyResult<DropTimeResult> {
+) -> DropTimeResult {
     let dt: f64 = 1.0 / 60.0;
     let t_total: f64 = walker_start / -walker_velocity;
     let mut balloon_positions: Vec<f64> = vec![];
@@ -45,7 +44,7 @@ pub fn compute_drop_time(
     let rounded_correct_drop_time = (correct_drop_time * 10.0).round() / 10.0;
     let student_drop_time = (input_drop_time * 10.0).round() / 10.0;
 
-    Ok(if student_drop_time == rounded_correct_drop_time {
+    if student_drop_time == rounded_correct_drop_time {
         DropTimeResult{
             hit: true,
             correct_drop_time: rounded_correct_drop_time,
@@ -59,5 +58,61 @@ pub fn compute_drop_time(
             balloon_positions: balloon_positions,
             walker_positions: walker_positions,
         }
-    })
+    }
+}
+
+#[pyfunction]
+pub fn compute_drop_time(
+    input_drop_time: f64,
+    height: f64,
+    walker_start: f64,
+    walker_velocity: f64,
+) -> PyResult<DropTimeResult> {
+    Ok(compute_drop_time_logic(
+        input_drop_time,
+        height,
+        walker_start,
+        walker_velocity,
+    ))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_valid_compute_drop_time_logic() {
+        const HEIGHT: f64 = 20.0;
+        const WALKER_START: f64 = 10.0;
+        const WALKER_VELOCITY: f64 = -2.0;
+    
+        let drop_time_calculation: DropTimeResult = compute_drop_time_logic(
+            3.0,
+            HEIGHT,
+            WALKER_START, 
+            WALKER_VELOCITY
+        );
+
+        assert!(drop_time_calculation.hit);
+        assert_eq!(drop_time_calculation.correct_drop_time, 3.0);
+        assert!(drop_time_calculation.balloon_positions.len() > 0);
+        assert!(drop_time_calculation.walker_positions.len() > 0);
+    }
+
+    #[test]
+    fn test_failed_compute_drop_time_logic() {
+        const HEIGHT: f64 = 20.0;
+        const WALKER_START: f64 = 10.0;
+        const WALKER_VELOCITY: f64 = -2.0;
+
+        let drop_time_calculation: DropTimeResult = compute_drop_time_logic(
+            5.0,
+            HEIGHT, 
+            WALKER_START,
+            WALKER_VELOCITY
+        );
+
+        assert!(!drop_time_calculation.hit);
+        assert_eq!(drop_time_calculation.correct_drop_time, 3.0);
+    }
 }
