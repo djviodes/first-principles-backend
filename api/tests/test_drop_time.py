@@ -5,7 +5,7 @@ from app.models.drop_time import DropTimeProblem
 
 
 def test_valid_drop_time_request(client):
-    response = client.get("/api/v1/generate-problem")
+    response = client.get("/api/v1/drop-time/generate-problem")
     response_body = response.json()
 
     assert response.status_code == 200
@@ -17,7 +17,7 @@ def test_valid_drop_time_request(client):
 
 
 def test_drop_time_request_wrote_to_database(client, wrap_the_session):
-    response = client.get("/api/v1/generate-problem")
+    response = client.get("/api/v1/drop-time/generate-problem")
     response_body = response.json()
     db_problem = wrap_the_session.get(DropTimeProblem, response_body["id"])
 
@@ -25,7 +25,7 @@ def test_drop_time_request_wrote_to_database(client, wrap_the_session):
 
 
 def test_valid_drop_time_attempt(client):
-    problem_response = client.get("/api/v1/generate-problem")
+    problem_response = client.get("/api/v1/drop-time/generate-problem")
     problem_body = problem_response.json()
 
     payload = {
@@ -33,7 +33,7 @@ def test_valid_drop_time_attempt(client):
         "student_drop_time": 1.5
     }
 
-    attempt_response = client.post("/api/v1/submit-attempt", json=payload)
+    attempt_response = client.post("/api/v1/drop-time/submit-attempt", json=payload)
     attempt_body = attempt_response.json()
 
     assert attempt_response.status_code == 200
@@ -51,7 +51,7 @@ def test_drop_time_attempt_failure(client):
         "student_drop_time": 1.5
     }
 
-    attempt_response = client.post("/api/v1/submit-attempt", json=payload)
+    attempt_response = client.post("/api/v1/drop-time/submit-attempt", json=payload)
     attempt_body = attempt_response.json()
 
     assert attempt_response.status_code == 404
@@ -64,6 +64,6 @@ def test_drop_time_attempt_malformed_input(client):
         "student_drop_time": "Not a float"
     }
 
-    attempt_response = client.post("/api/v1/submit-attempt", json=payload)
+    attempt_response = client.post("/api/v1/drop-time/submit-attempt", json=payload)
 
     assert attempt_response.status_code == 422
