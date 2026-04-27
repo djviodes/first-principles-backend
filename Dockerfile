@@ -8,7 +8,7 @@ RUN pip3 install maturin --break-system-packages
 COPY math_and_physics/Cargo.toml ./Cargo.toml
 COPY math_and_physics/src ./src
 
-RUN maturin build --release
+RUN PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 maturin build --release --features pyo3/abi3-py311
 
 # Stage 2: Python API
 FROM python:3.11
