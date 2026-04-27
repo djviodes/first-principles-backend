@@ -8,6 +8,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://first_principles:first_principles_password@localhost:5432/first_principles
       VIRTUAL_ENV: ${{ github.workspace }}/api/.venv
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     services:
       postgres:
         image: postgres:15
