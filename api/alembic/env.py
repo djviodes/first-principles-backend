@@ -1,5 +1,9 @@
 from app.config import settings
 from app.models.drop_time import DropTimeAttempt, DropTimeProblem
+from app.models.straight_line_acceleration import (
+    StraightLineAccelerationAttempt,
+    StraightLineAccelerationProblem,
+)
 from app.db import Base
 
 from logging.config import fileConfig
