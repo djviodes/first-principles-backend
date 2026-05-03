@@ -14,48 +14,6 @@ A physics study tool that aims to assist students and physics enthusiasts alike 
 
 ---
 
-## Structure
-
-```
-first-principles-backend/
-├── math_and_physics/
-│   ├── src/
-│   │   ├── lib.rs
-│   │   └── drop_time.rs
-│   ├── benches/
-│   ├── tests/
-│   └── Cargo.toml
-├── api/
-│   ├── app/
-│   │   ├── core/
-│   │   │   ├── errors.py
-│   │   │   └── logging.py
-│   │   ├── models/
-│   │   │   └── drop_time.py
-│   │   ├── routers/
-│   │   │   └── drop_time.py
-│   │   ├── schemas/
-│   │   │   └── drop_time.py
-│   │   ├── services/
-│   │   │   └── drop_time.py
-│   │   ├── config.py
-│   │   ├── db.py
-│   │   └── main.py
-│   ├── alembic/
-│   │   └── versions/
-│   │       └── fe0e12375e1e_initial_migration.py
-│   ├── tests/
-│   │   ├── conftest.py
-│   │   └── test_drop_time.py
-│   ├── Dockerfile
-│   └── pyproject.toml
-├── .gitignore
-├── docker-compose.yml
-└── README.md
-```
-
----
-
 ## Prerequisites
 
 - Python >=3.11
