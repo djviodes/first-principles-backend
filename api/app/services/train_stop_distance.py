@@ -54,7 +54,7 @@ def submit_attempt(
     train_stop_distance_attempt_obj = TrainStopDistanceAttempt(
         problem_id=request.problem_id,
         student_train_stop_distance=request.student_train_stop_distance,
-        correct_train_stop_distance=train_stop_distance_results.correct_train_stop_distance,
+        correct_train_stop_distance=train_stop_distance_results.correct_stopping_distance,
         distance_hit=train_stop_distance_results.hit
     )
 
@@ -66,6 +66,6 @@ def submit_attempt(
         id=train_stop_distance_attempt_obj.id,
         created_at=train_stop_distance_attempt_obj.created_at,
         distance_hit=train_stop_distance_results.hit,
-        correct_train_stop_distance=train_stop_distance_results.correct_train_stop_distance,
+        correct_train_stop_distance=train_stop_distance_results.correct_stopping_distance,
         train_positions=train_stop_distance_results.train_positions
     )
