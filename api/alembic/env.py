@@ -4,6 +4,10 @@ from app.models.straight_line_acceleration import (
     StraightLineAccelerationAttempt,
     StraightLineAccelerationProblem,
 )
+from app.models.train_stop_distance import (
+    TrainStopDistanceAttempt,
+    TrainStopDistanceProblem
+)
 from app.db import Base
 
 from logging.config import fileConfig
