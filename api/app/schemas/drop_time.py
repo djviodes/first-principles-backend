@@ -12,9 +12,11 @@ class DropTimeProblemResponse(BaseModel):
     walker_start: float
     walker_velocity: float
 
+
 class DropTimeAttemptRequest(BaseModel):
     problem_id: uuid.UUID
     student_drop_time: float
+
 
 class DropTimeAttemptResponse(BaseModel):
     id: uuid.UUID
