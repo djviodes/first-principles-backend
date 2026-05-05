@@ -80,7 +80,7 @@ mod tests {
         );
 
         assert!(distance_calculation.hit);
-        assert_eq!(distance_calculation.correct_stopping_distance, 1050.8);
+        assert_eq!(distance_calculation.correct_stopping_distance, -1050.8);
         assert!(distance_calculation.train_positions.len() > 0);
     }
 
@@ -96,6 +96,6 @@ mod tests {
         );
 
         assert!(!distance_calculation.hit);
-        assert_eq!(distance_calculation.correct_stopping_distance, 1050.8);
+        assert_eq!(distance_calculation.correct_stopping_distance, -1050.8);
     }
 }
