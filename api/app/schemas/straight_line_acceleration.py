@@ -11,9 +11,11 @@ class StraightLineAccelerationProblemResponse(BaseModel):
     distance: float
     time: float
 
+
 class StraightLineAccelerationAttemptRequest(BaseModel):
     problem_id: uuid.UUID
     student_straight_line_acceleration: float
+
 
 class StraightLineAccelerationAttemptResponse(BaseModel):
     id: uuid.UUID
