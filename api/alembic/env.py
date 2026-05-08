@@ -8,6 +8,10 @@ from app.models.train_stop_distance import (
     TrainStopDistanceAttempt,
     TrainStopDistanceProblem
 )
+from app.models.bird_instantaneous_velocity import (
+    BirdInstantaneousVelocityAttempt,
+    BirdInstantaneousVelocityProblem
+)
 from app.db import Base
 
 from logging.config import fileConfig
