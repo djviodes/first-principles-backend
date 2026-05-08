@@ -13,11 +13,11 @@ pub struct BirdInstantaneousVelocityResult {
 fn compute_bird_instantaneous_velocity_logic(
     input_instantaneous_velocity: f64,
     function_type: &str,
+    time: f64,
     a: f64,
     b: f64,
     c: Option<f64>,
     d: Option<f64>,
-    time: f64,
 ) -> BirdInstantaneousVelocityResult {
     let dt: f64 = 1.0 / 60.0;
     let mut bird_positions: Vec<f64> = vec![];
@@ -64,20 +64,20 @@ fn compute_bird_instantaneous_velocity_logic(
 pub fn compute_bird_instantaneous_velocity(
     input_instantaneous_velocity: f64,
     function_type: &str,
+    time: f64,
     a: f64,
     b: f64,
     c: Option<f64>,
     d: Option<f64>,
-    time: f64,
 ) -> PyResult<BirdInstantaneousVelocityResult> {
     Ok(compute_bird_instantaneous_velocity_logic(
         input_instantaneous_velocity,
         function_type,
+        time,
         a,
         b,
         c,
         d,
-        time
     ))
 }
 
@@ -95,11 +95,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             9.0,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
             None,
-            None,
-            TIME
+            None
         );
 
         assert!(instantaneous_velocity_calculation.hit);
@@ -117,11 +117,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             8.0,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
             None,
-            None,
-            TIME
+            None
         );
 
         assert!(!instantaneous_velocity_calculation.hit);
@@ -139,11 +139,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             9.1,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
-            C,
-            None,
-            TIME
+            Some(C),
+            None
         );
 
         assert!(instantaneous_velocity_calculation.hit);
@@ -162,11 +162,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             8.1,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
-            C,
-            None,
-            TIME
+            Some(C),
+            None
         );
 
         assert!(!instantaneous_velocity_calculation.hit);
@@ -185,11 +185,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             12.7,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
-            C,
-            D,
-            TIME
+            Some(C),
+            Some(D)
         );
 
         assert!(instantaneous_velocity_calculation.hit);
@@ -209,11 +209,11 @@ mod tests {
         let instantaneous_velocity_calculation: BirdInstantaneousVelocityResult = compute_bird_instantaneous_velocity_logic(
             11.7,
             FUNCTION_TYPE,
+            TIME,
             A,
             B,
-            C,
-            D,
-            TIME
+            Some(C),
+            Some(D)
         );
 
         assert!(!instantaneous_velocity_calculation.hit);
