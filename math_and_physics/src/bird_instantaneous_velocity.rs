@@ -45,18 +45,10 @@ fn compute_bird_instantaneous_velocity_logic(
         t += dt;
     }
 
-    if student_instantaneous_velocity == rounded_correct_instantaneous_velocity {
-        BirdInstantaneousVelocityResult{
-            hit: true,
-            correct_instantaneous_velocity: rounded_correct_instantaneous_velocity,
-            bird_positions: bird_positions
-        }
-    } else {
-        BirdInstantaneousVelocityResult{
-            hit: false,
-            correct_instantaneous_velocity: rounded_correct_instantaneous_velocity,
-            bird_positions: bird_positions
-        }
+    BirdInstantaneousVelocityResult{
+        hit: student_instantaneous_velocity == rounded_correct_instantaneous_velocity,
+        correct_instantaneous_velocity: rounded_correct_instantaneous_velocity,
+        bird_positions
     }
 }
 
