@@ -48,19 +48,19 @@ fn compute_relay_catchup_time_logic(
     let student_catchup_time: f64 = (input_catchup_time * 10.0).round() / 10.0;
 
     let mut t: f64 = 0.0;
-    let mut v_one = v_one;
-    let mut v_two = v_two;
+    let mut vel_one = v_one;
+    let mut vel_two = v_two;
     let mut pos_one = s_one;
     let mut pos_two = s_two;
     while t <= input_catchup_time {
         let acc_one = a * t + b_one;
         let acc_two = a * t + b_two;
 
-        v_one += acc_one * dt;
-        v_two += acc_two * dt;
+        vel_one += acc_one * dt;
+        vel_two += acc_two * dt;
 
-        pos_one += v_one * dt;
-        pos_two += v_two * dt;
+        pos_one += vel_one * dt;
+        pos_two += vel_two * dt;
 
         runner_one_positions.push(pos_one);
         runner_two_positions.push(pos_two);
@@ -68,20 +68,11 @@ fn compute_relay_catchup_time_logic(
         t += dt;
     }
 
-    if student_catchup_time == rounded_correct_catchup_time {
-        RelayCatchupTimeResult{
-            hit: true,
-            correct_catchup_time: rounded_correct_catchup_time,
-            runner_one_positions: runner_one_positions,
-            runner_two_positions: runner_two_positions
-        }
-    } else {
-        RelayCatchupTimeResult{
-            hit: false,
-            correct_catchup_time: rounded_correct_catchup_time,
-            runner_one_positions: runner_one_positions,
-            runner_two_positions: runner_two_positions
-        }
+    RelayCatchupTimeResult{
+        hit: student_catchup_time == rounded_correct_catchup_time,
+        correct_catchup_time: rounded_correct_catchup_time,
+        runner_one_positions,
+        runner_two_positions
     }
 }
 
