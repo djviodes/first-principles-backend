@@ -31,18 +31,10 @@ fn compute_straight_line_acceleration_logic(
         t += dt;
     }
 
-    if student_straight_line_acceleration == rounded_correct_straight_line_acceleration {
-        StraightLineAccelerationResult{
-            hit: true,
-            correct_straight_line_acceleration: rounded_correct_straight_line_acceleration,
-            car_positions: car_positions,
-        }
-    } else {
-        StraightLineAccelerationResult{
-            hit: false,
-            correct_straight_line_acceleration: rounded_correct_straight_line_acceleration,
-            car_positions: car_positions,
-        }
+    StraightLineAccelerationResult{
+        hit: student_straight_line_acceleration == rounded_correct_straight_line_acceleration,
+        correct_straight_line_acceleration: rounded_correct_straight_line_acceleration,
+        car_positions,
     }
 }
 
