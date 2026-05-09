@@ -36,18 +36,10 @@ fn compute_train_stop_distance_logic(
         t += dt;
     }
 
-    if student_train_stop_distance == rounded_correct_train_stop_distance {
-        TrainStopDistanceResult{
-            hit: true,
-            correct_stopping_distance: rounded_correct_train_stop_distance,
-            train_positions: train_positions
-        }
-    } else {
-        TrainStopDistanceResult{
-            hit: false,
-            correct_stopping_distance: rounded_correct_train_stop_distance,
-            train_positions: train_positions
-        }
+    TrainStopDistanceResult{
+        hit: student_train_stop_distance == rounded_correct_train_stop_distance,
+        correct_stopping_distance: rounded_correct_train_stop_distance,
+        train_positions
     }
 }
 
