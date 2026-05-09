@@ -107,3 +107,62 @@ pub fn compute_relay_catchup_time(
         s_two,
     ))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_valid_compute_relay_catchup_time_logic() {
+        const A: f64 = 2.0;
+        const B_ONE: f64 = 15.0;
+        const B_TWO: f64 = 7.0;
+        const V_ONE: f64 = 7.0;
+        const V_TWO: f64 = 3.0;
+        const S_ONE: f64 = 5.0;
+        const S_TWO: f64 = 20.0;
+
+        let catchup_time_calculation: RelayCatchupTimeResult = compute_relay_catchup_time_logic(
+            1.5,
+            A,
+            B_ONE,
+            B_TWO,
+            V_ONE,
+            V_TWO,
+            S_ONE,
+            S_TWO
+        );
+
+        assert!(catchup_time_calculation.hit);
+        assert_eq!(catchup_time_calculation.correct_catchup_time, 1.5);
+        assert!(catchup_time_calculation.runner_one_positions.len() > 0);
+        assert!(catchup_time_calculation.runner_two_positions.len() > 0);
+    }
+
+    #[test]
+    fn test_failed_compute_relay_catchup_time_logic() {
+        const A: f64 = 2.0;
+        const B_ONE: f64 = 15.0;
+        const B_TWO: f64 = 7.0;
+        const V_ONE: f64 = 7.0;
+        const V_TWO: f64 = 3.0;
+        const S_ONE: f64 = 5.0;
+        const S_TWO: f64 = 20.0;
+
+        let catchup_time_calculation: RelayCatchupTimeResult = compute_relay_catchup_time_logic(
+            2.0,
+            A,
+            B_ONE,
+            B_TWO,
+            V_ONE,
+            V_TWO,
+            S_ONE,
+            S_TWO
+        );
+
+        assert!(!catchup_time_calculation.hit);
+        assert_eq!(catchup_time_calculation.correct_catchup_time, 1.5);
+        assert!(catchup_time_calculation.runner_one_positions.len() > 0);
+        assert!(catchup_time_calculation.runner_two_positions.len() > 0);
+    }
+}
