@@ -189,3 +189,138 @@ pub fn compute_squirrel_part_c(
         time
     ))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_valid_compute_squirrel_part_a_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_a_calculation: SquirrelPartAResult = compute_squirrel_part_a_logic(
+            0.280,
+            0.072,
+            0.057,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(squirrel_part_a_calculation.hit);
+        assert_eq!(squirrel_part_a_calculation.correct_a_x, 0.280);
+        assert_eq!(squirrel_part_a_calculation.correct_b_x, 0.072);
+        assert_eq!(squirrel_part_a_calculation.correct_c_y, 0.057);
+        assert!(squirrel_part_a_calculation.squirrel_x_positions.len() > 0);
+        assert!(squirrel_part_a_calculation.squirrel_y_positions.len() > 0);
+    }
+
+    #[test]
+    fn test_failed_compute_squirrel_part_a_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_a_calculation: SquirrelPartAResult = compute_squirrel_part_a_logic(
+            0.180,
+            0.062,
+            0.047,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(!squirrel_part_a_calculation.hit);
+        assert_eq!(squirrel_part_a_calculation.correct_a_x, 0.280);
+        assert_eq!(squirrel_part_a_calculation.correct_b_x, 0.072);
+        assert_eq!(squirrel_part_a_calculation.correct_c_y, 0.057);
+        assert!(squirrel_part_a_calculation.squirrel_x_positions.len() > 0);
+        assert!(squirrel_part_a_calculation.squirrel_y_positions.len() > 0);
+    }
+
+    #[test]
+    fn test_valid_compute_squirrel_part_b_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_b_calculation: SquirrelPartBResult = compute_squirrel_part_b_logic(
+            3.306,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(squirrel_part_b_calculation.hit);
+        assert_eq!(squirrel_part_b_calculation.correct_distance, 3.306);
+    }
+
+    #[test]
+    fn test_failed_compute_squirrel_part_b_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_b_calculation: SquirrelPartBResult = compute_squirrel_part_b_logic(
+            2.306,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(!squirrel_part_b_calculation.hit);
+        assert_eq!(squirrel_part_b_calculation.correct_distance, 3.306);
+    }
+
+    #[test]
+    fn test_valid_compute_squirrel_part_c_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_c_calculation: SquirrelPartCResult = compute_squirrel_part_c_logic(
+            1.562,
+            65.814,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(squirrel_part_c_calculation.hit);
+        assert_eq!(squirrel_part_c_calculation.correct_magnitude, 1.562);
+        assert_eq!(squirrel_part_c_calculation.correct_direction, 65.814);
+    }
+
+    #[test]
+    fn test_failed_compute_squirrel_part_c_logic() {
+        const A_X: f64 = 0.280;
+        const B_X: f64 = 0.0360;
+        const C_Y: f64 = 0.0190;
+        const TIME: f64 = 5.0;
+
+        let squirrel_part_c_calculation: SquirrelPartCResult = compute_squirrel_part_c_logic(
+            0.562,
+            64.814,
+            A_X,
+            B_X,
+            C_Y,
+            TIME
+        );
+
+        assert!(!squirrel_part_c_calculation.hit);
+        assert_eq!(squirrel_part_c_calculation.correct_magnitude, 1.562);
+        assert_eq!(squirrel_part_c_calculation.correct_direction, 65.814);
+    }
+}
