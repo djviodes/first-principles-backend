@@ -94,3 +94,85 @@ def submit_attempt_a(
         squirrel_x_positions=squirrel_position_and_velocity_a_results.squirrel_x_positions,
         squirrel_y_positions=squirrel_position_and_velocity_a_results.squirrel_y_positions
     )
+
+
+def submit_attempt_b(
+    request: SquirrelPositionAndVelocityAttemptBRequest,
+    db: Session
+) -> SquirrelPositionAndVelocityAttemptBResponse:
+    problem_data = db.get(SquirrelPositionAndVelocityProblem, request.problem_id)
+
+    if problem_data is None:
+        raise SimulationError(
+            message="Problem not found",
+            status_code=404
+        )
+    
+    squirrel_position_and_velocity_b_results = compute_squirrel_part_b(
+        request.student_distance,
+        problem_data.a_x,
+        problem_data.b_x,
+        problem_data.c_y,
+        problem_data.time
+    )
+
+    squirrel_position_and_velocity_attempt_b_obj = SquirrelPositionAndVelocityPartBAttempt(
+        problem_id=request.problem_id,
+        student_distance=request.student_distance,
+        correct_distance=squirrel_position_and_velocity_b_results.correct_distance,
+        distance_hit=squirrel_position_and_velocity_b_results.hit
+    )
+
+    db.add(squirrel_position_and_velocity_attempt_b_obj)
+    db.commit()
+    db.refresh(squirrel_position_and_velocity_attempt_b_obj)
+
+    return SquirrelPositionAndVelocityAttemptBResponse(
+        id=squirrel_position_and_velocity_attempt_b_obj.id,
+        created_at=squirrel_position_and_velocity_attempt_b_obj.created_at,
+        distance_hit=squirrel_position_and_velocity_b_results.hit,
+        correct_distance=squirrel_position_and_velocity_b_results.correct_distance
+    )
+
+
+def submit_attempt_c(
+    request: SquirrelPositionAndVelocityAttemptCRequest,
+    db: Session
+) -> SquirrelPositionAndVelocityAttemptCResponse:
+    problem_data = db.get(SquirrelPositionAndVelocityProblem, request.problem_id)
+
+    if problem_data is None:
+        raise SimulationError(
+            message="Problem not found",
+            status_code=404
+        )
+    
+    squirrel_position_and_velocity_c_results = compute_squirrel_part_c(
+        request.student_magnitude,
+        request.student_direction,
+        problem_data.a_x,
+        problem_data.b_x,
+        problem_data.c_y,
+        problem_data.time
+    )
+
+    squirrel_position_and_velocity_attempt_c_obj = SquirrelPositionAndVelocityPartCAttempt(
+        problem_id=request.problem_id,
+        student_magnitude=request.student_magnitude,
+        student_direction=request.student_direction,
+        correct_magnitude=squirrel_position_and_velocity_c_results.correct_magnitude,
+        correct_direction=squirrel_position_and_velocity_c_results.correct_direction,
+        magnitude_and_direction_hit=squirrel_position_and_velocity_c_results.hit
+    )
+
+    db.add(squirrel_position_and_velocity_attempt_c_obj)
+    db.commit()
+    db.refresh(squirrel_position_and_velocity_attempt_c_obj)
+
+    return SquirrelPositionAndVelocityAttemptCResponse(
+        id=squirrel_position_and_velocity_attempt_c_obj.id,
+        created_at=squirrel_position_and_velocity_attempt_c_obj.created_at,
+        magnitude_and_direction_hit=squirrel_position_and_velocity_c_results.hit,
+        correct_magnitude=squirrel_position_and_velocity_c_results.correct_magnitude,
+        correct_direction=squirrel_position_and_velocity_c_results.correct_direction
+    )
