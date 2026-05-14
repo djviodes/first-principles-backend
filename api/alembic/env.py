@@ -16,6 +16,12 @@ from app.models.relay_catchup_time import (
     RelayCatchupTimeAttempt,
     RelayCatchupTimeProblem
 )
+from app.models.squirrel_position_and_velocity_vectors import (
+    SquirrelPositionAndVelocityProblem,
+    SquirrelPositionAndVelocityPartAAttempt,
+    SquirrelPositionAndVelocityPartBAttempt,
+    SquirrelPositionAndVelocityPartCAttempt
+)
 from app.db import Base
 
 from logging.config import fileConfig
