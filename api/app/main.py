@@ -6,6 +6,7 @@ from app.routers.train_stop_distance import router as train_stop_distance_router
 from app.routers.bird_instantaneous_velocity import router as bird_instantaneous_velocity_router
 from app.routers.relay_catchup_time import router as relay_catchup_time_router
 from app.routers.squirrel_position_and_velocity_vectors import router as squirrel_position_and_velocity_router
+from app.routers.river_jump_velocity import router as river_jump_velocity_router
 
 from app.core.errors import register_error_handlers
 from app.core.logging import logger
@@ -39,4 +40,9 @@ app.include_router(
     squirrel_position_and_velocity_router,
     prefix="/api/v1/squirrel-position-and-velocity",
     tags=["Squirrel_Position_And_Velocity"]
+)
+app.include_router(
+    river_jump_velocity_router,
+    prefix="/api/v1/river-jump-velocity",
+    tags=["River_Jump_Velocity"]
 )

@@ -22,6 +22,11 @@ from app.models.squirrel_position_and_velocity_vectors import (
     SquirrelPositionAndVelocityPartBAttempt,
     SquirrelPositionAndVelocityPartCAttempt
 )
+from app.models.river_jump_velocity import (
+    RiverJumpVelocityProblem,
+    RiverJumpVelocityPartAAttempt,
+    RiverJumpVelocityPartBAttempt
+)
 from app.db import Base
 
 from logging.config import fileConfig
